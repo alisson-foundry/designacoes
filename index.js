@@ -6,6 +6,35 @@
 
 console.log("App loaded. Main button and nav link updated for Google Form integration.");
 
+const monthNamesPT = [
+  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+// Function to update table headers with dynamic month names
+function updateTableHeaders() {
+  const now = new Date();
+  const currentMonth = now.getMonth(); // 0-indexed (0 for January, 11 for December)
+
+  const nextMonthIndex = (currentMonth + 1) % 12;
+  const monthAfterNextIndex = (currentMonth + 2) % 12;
+
+  const nextMonthName = monthNamesPT[nextMonthIndex];
+  const monthAfterNextName = monthNamesPT[monthAfterNextIndex];
+
+  const headers = document.querySelectorAll('table thead th');
+  if (headers.length >= 4) {
+    // The 3rd header (index 2) should display "Status (Mês Seguinte ao Atual)"
+    // The 4th header (index 3) should display "Status (Mês Dois Meses Após o Atual)"
+    headers[2].textContent = `Status (${nextMonthName})`;
+    headers[3].textContent = `Status (${monthAfterNextName})`;
+    console.log(`Table headers updated to Status (${nextMonthName}) and Status (${monthAfterNextName})`);
+  } else {
+    console.warn("Could not find enough table headers to update month names.");
+  }
+}
+
+
 // Function to fetch and display data from Google Apps Script Web App
 async function loadTableData() {
   // ------------------------------------------------------------------------------------
@@ -54,7 +83,8 @@ async function loadTableData() {
     rows.forEach(rowData => {
       const designacao = rowData['Designação'] || '';
       const responsavel = rowData['Responsável(is)'] || '';
-      const statusAtualRaw = rowData['Status (Mês Atual)'] || '';
+      // These keys MUST match the column names in your Google Sheet
+      const statusAtualRaw = rowData['Status (Mês Atual)'] || ''; 
       const statusProximoRaw = rowData['Status (Próximo Mês)'] || '';
       const linkEnvioData = rowData['Link do Último Envio'];
 
@@ -117,6 +147,7 @@ async function loadTableData() {
 
 // Function to initialize data loading and set up interval
 function initializeDataSync() {
+    updateTableHeaders(); // Update headers once on load
     loadTableData(); // Load data immediately on page load
     // Set an interval to refresh data every 2 minutes (120,000 milliseconds)
     // You can adjust this interval if needed. For faster updates with a Web App, 
