@@ -1,0 +1,226 @@
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+#page-hero {
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 15px 20px; /* Reduced top/bottom padding from 60px */
+    min-height: 0; /* Adjusted min-height from 240px to allow shrinking */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #003973 0%, #004d8c 50%, #0060a1 100%); /* Dark blue gradient */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px; /* Max width for hero content */
+}
+
+.main-nav {
+    position: absolute; /* Relative to body now */
+    top: 20px;
+    right: 20px; /* Changed from left: 20px; */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.main-nav a:hover {
+    text-decoration: underline;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: white; /* Default for icons in nav, might be overridden */
+    cursor: pointer;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-button svg {
+    display: block; /* Ensure SVG doesn't add extra space */
+}
+
+/* Removed .search-button svg styles as the button is removed */
+
+
+#page-hero h1 {
+    font-size: 2.8em;
+    /* margin-top: 40px; Removed as nav is no longer influencing its position from within hero */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.welcome-message {
+    font-size: 1.1em;
+    max-width: 600px;
+    margin: 0 auto 30px auto; /* Added bottom margin */
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 1100px;
+    margin: 0 auto; /* Center main content */
+}
+
+.submit-assignment-button {
+    display: block;
+    background-color: #3275a8; /* Blue from image */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 auto 40px auto; /* Centered with bottom margin */
+    text-transform: uppercase;
+    text-decoration: none; /* Ensure no underline for link styled as button */
+    text-align: center; 
+}
+
+.submit-assignment-button:hover {
+    background-color: #285a84;
+    text-decoration: none; /* Ensure no underline on hover */
+}
+
+.control-panel {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.table-title {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+/* Removed .table-title .popout-button styles as the button is removed */
+/* Removed .table-title .popout-button svg styles as the button is removed */
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left; /* Default alignment for td, overridden for specific columns below */
+}
+
+thead th {
+    background-color: #e9ecef; /* Light gray */
+    font-weight: bold;
+    color: #495057;
+    text-align: center; /* Center align header text */
+}
+
+/* Target 3rd and 4th td elements in tbody for status cell centering */
+tbody td:nth-child(3),
+tbody td:nth-child(4) {
+    text-align: center;
+}
+
+.status-pending {
+    background-color: #fff3cd; /* Light yellow */
+    color: #856404;
+    /* text-align: center; /* Centering handled by the nth-child rule now, but keeping for explicitness if preferred */
+}
+
+.status-delivered {
+    background-color: #28a745; /* Green */
+    color: white;
+    /* text-align: center; /* Centering handled by the nth-child rule now, but keeping for explicitness if preferred */
+}
+
+/* Footer icons styles removed as the entire section is removed */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #page-hero {
+        padding: 10px 15px; /* Reduced top/bottom padding from 40px */
+        min-height: 0; /* Adjusted min-height from 200px */
+    }
+
+    #page-hero h1 {
+        font-size: 2em;
+        /* margin-top: 30px; No longer needed here as default margin-top from h1 was also removed */
+    }
+
+    .welcome-message {
+        font-size: 1em;
+    }
+
+    .main-nav {
+        position: static;
+        margin-top: 20px; /* Added space from top when static */
+        margin-bottom: 20px;
+        justify-content: center;
+    }
+    .main-nav a, .main-nav .icon-button { /* Target links and icon button for color change */
+        color: #003973; /* Dark blue for visibility on light body background */
+        margin: 0 10px; 
+    }
+    /* .search-button specific margin is covered by the general rule above */
+
+    .submit-assignment-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    .table-title {
+        font-size: 1.3em;
+    }
+    /* Removed .table-title .popout-button svg responsive styles */
+
+
+    th, td {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+    
+    .control-panel {
+        overflow-x: auto;
+    }
+    table {
+      min-width: 600px; 
+    }
+
+    /* Footer icons responsive styles removed */
+}
